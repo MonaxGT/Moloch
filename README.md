@@ -18,7 +18,7 @@ Open your browser and open http://<dockerhost ip>:8005/
 
 Login/Password
  
-admin/pyHIksxo
+admin/moloch
 
 Moloch use utils moloch-capture to read pcap to elasticsearch view. 
 Compose mount directory /tmp/dump to /data/pcap directory with pcap.
