@@ -1,0 +1,25 @@
+version: '2'
+services:
+  docker-moloch:
+    container_name: moloch
+    build:
+      context: ./docker-moloch
+      dockerfile: Dockerfile
+    volumes:
+      - /tmp/moloch/pcap:/data/pcap
+    ports:
+      - "8005:8005"
+    depends_on:
+      - es-moloch
+    links:
+      - es-moloch
+    environment:
+      PASSWORD_MOLOCH: "moloch"
+      PASSWORD_MOLOCH_SHELL: "M0LoCh_ShElL"
+
+  es-moloch:
+    container_name: esmoloch
+    image: elasticsearch:5.6.4-alpine
+    ports:
+      - "9200:9200"
+
