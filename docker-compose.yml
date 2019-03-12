@@ -1,0 +1,40 @@
+version: '2'
+services:
+  docker-moloch:
+    container_name: moloch
+    privileged: true
+    security_opt:
+      - label:disable
+    volumes:
+      - ./docker-moloch/scripts:/data/script/
+      - /tmp/moloch/pcap:/data/pcap
+    build:
+      context: ./docker-moloch
+      dockerfile: Dockerfile
+    ports:
+      - "8005:8005"
+    depends_on:
+      - es-moloch
+    environment:
+      PASSWORD_MOLOCH: "moloch"
+      PASSWORD_MOLOCH_SHELL: "M0LoCh_ShElL"
+
+  es-moloch:
+    restart: unless-stopped
+    container_name: esmoloch
+    security_opt:
+      - label:disable
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.5.1
+    environment:
+      - "ES_JAVA_OPTS=-Xms4g -Xmx4g"
+    volumes: 
+      - /var/opt/docker-persistence/elasticsearch/data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536

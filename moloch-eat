@@ -1,0 +1,4 @@
+#!/bin/bash 
+
+docker exec -it moloch moloch-capture -r /data/pcap/"${1}" -t "${2}"
+echo 'docker exec -it moloch moloch-capture -r /data/pcap/"${1}" -t "${2}"'
