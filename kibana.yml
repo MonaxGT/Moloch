@@ -2,5 +2,5 @@
 #
 server.name: kibana
 server.host: "0"
-elasticsearch.url: http://esmoloch:9202
+elasticsearch.url: http://esmoloch:9200
 xpack.monitoring.ui.container.elasticsearch.enabled: true
